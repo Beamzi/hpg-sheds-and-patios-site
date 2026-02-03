@@ -1,59 +1,76 @@
-    # Project Rules
+# Project Rules
 
-    Before creating or modifying any UI components, ALWAYS reference design-system.md.
+Before creating or modifying UI components, ALWAYS reference design-system.md.
 
-    Use ONLY CSS variables defined in globals.css. No hardcoded values.
+Use ONLY CSS variables defined in globals.css. No hardcoded values.
 
-    When using Tailwind:
+When using Tailwind:
 
-    - Use arbitrary values to reference CSS vars: `bg-[var(--color-primary)]`
-    - Or use custom component classes defined in globals.css
-    - NEVER use arbitrary Tailwind values (no p-7, no text-gray-650)
-    - NEVER hardcode colors (no #3b82f6, no rgb values)
+- Use arbitrary values to reference CSS vars: `bg-[var(--color-primary)]`
+- Or use custom component classes defined in globals.css
+- NEVER use arbitrary Tailwind values (no p-7, no text-gray-650)
+- NEVER hardcode colors (no #3b82f6, no rgb values)
 
-    Dark mode is handled automatically via CSS variables in globals.css - do not add manual dark: variants.
+Dark mode is handled automatically via CSS variables in globals.css - do not add manual dark: variants.
 
-    When creating reusable component patterns, add them to globals.css using @apply in the @layer components section.
+When creating reusable component patterns, add them to globals.css using @apply in the @layer components section.
 
-    ## Content Management
+## Layout & Responsiveness
 
-    ALL text content must be separated from components and stored in src/data/.
+- ALL components must be fully mobile responsive
 
-    Structure:
+## Global Components
 
-    - Global content (nav, footer): `src/data/navigation.ts`, `src/data/footer.ts`
-    - Page content: `src/data/pages/[pagename].ts` where the object structure mirrors the page structure
+- Navbar/Header and Footer components belong ONLY in root layout.
+  tsx
+- Page routes contain page-specific content
 
-    Example:
+## Typography
 
-    ```ts
-    // src/data/pages/home.ts
-    export const homeContent = {
-    hero: { title: "...", subtitle: "..." },
-    cta: { heading: "...", button: "..." },
-    features: { heading: "...", items: [...] },
-    }
-    ```
+- Primary Font: `var(--font-primary)` - Use for all text
+- Secondary Font: `var(--font-secondary)` - Only use when explicitly instructed (e.g., code blocks)
+- Body text uses primary font by default
+- Fonts are defined in layout.tsx and can be changed there without modifying CSS
 
-    - NEVER hardcode text strings in components
-    - Import page content: `import { homeContent } from '@/data/pages/home'`
-    - Pass sections to components: `<Hero content={homeContent.hero} />`
-    -Import data files directly in components - no prop passing for content. Avoid unnecessary interface typing for content props.
+## Background Elevation
+
+- `var(--background)` - Page/section backgrounds
+- `var(--background-elevated)` - Cards, containers, sections
+- `var(--background-elevated-high)` - ONLY for floating overlays (modals, dropdowns, tooltips) - use sparingly
+
+## Content Management
+
+ALL text content must be separated from components and stored in src/data/.
+
+Structure:
+
+- Global content (nav, footer): `src/data/navigation.ts`, `src/data/footer.ts`
+- Page content: `src/data/pages/[pagename].ts` where the object structure mirrors the page structure
+
+Example:
+
+```ts
+// src/data/pages/home.ts
+export const homeContent = {
+  hero: { title: "...", subtitle: "..." },
+  cta: { heading: "...", button: "..." },
+  features: { heading: "...", items: [...] },
+}
+```
+
+- NEVER hardcode text strings in components
+- Import data files directly in components - no prop passing for content
+- Avoid unnecessary interface typing for content props
+- If no specific content is provided, use clear placeholder text in data objects (e.g., "Hero Title", "Feature description goes here")
+- Use clear, semantic key names that match the component/section purpose (hero, features, testimonials)
+- Use camelCase for all keys
+- Avoid generic names (section1, content, data)
 
 ## Interaction & Animation
 
-- Simple UI toggles may use native HTML semantics (e.g. <details>) where appropriate.
-- If an interaction requires:
-
-  - custom enter/exit animations
-  - height or layout animations
-  - coordinated open/close behavior
-  - or future extensibility beyond basic toggling
-
-  THEN prefer React-managed state using hooks (useState, useEffect).
-
+- Simple UI toggles may use native HTML semantics (e.g. <details>) where appropriate
+- If an interaction requires custom enter/exit animations, height/layout animations, coordinated open/close behavior, or future extensibility beyond basic toggling, THEN prefer React-managed state using hooks (useState, useEffect)
 - In such cases:
-
   - Mark components as "use client"
   - Use React state to control interaction
   - Drive animations via CSS classes, data-attributes, or animation libraries

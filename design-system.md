@@ -8,10 +8,16 @@ All design tokens are defined as CSS variables in `globals.css`.
 - Secondary: `var(--color-secondary)`
 - Muted: `var(--color-muted)`
 - Border: `var(--color-border)`
-- Background: `var(--background)`
+- Background: `var(--background)` - Page background
+- Background Elevated: `var(--background-elevated)` - Cards, sections, inner containers
+- Background Elevated High: `var(--background-elevated-high)` - Modals, inner dropdowns, tooltips, popovers (use sparingly for overlays only)
 - Foreground: `var(--foreground)`
 
 Dark mode adjusts these automatically via `@media (prefers-color-scheme: dark)`.
+
+## Border
+
+- Border: `var(--border)` - 1px solid, adapts to theme
 
 ## Spacing
 
@@ -40,8 +46,9 @@ Use these pre-built classes for common patterns:
 
 - `.btn-primary` - Primary button
 - `.btn-secondary` - Secondary button
-- `.card` - Card container
+- `.card` - Card container (uses elevated background)
 - `.input-field` - Form input
+- `.focus-outline` - Focus outline (adapts to theme)
 
 ### Usage:
 
@@ -62,7 +69,14 @@ Use these pre-built classes for common patterns:
 
 - One-off styling
 - Component-specific variations
-- Example: `className="bg-[var(--color-primary)] p-[var(--spacing-md)]"`
+- Example: `className="bg-[var(--background-elevated)] p-[var(--spacing-md)]"`
+
+## Background Elevation Usage
+
+- Use `var(--background)` for page/section backgrounds
+- Use `var(--background-elevated)` for cards, containers, sections
+- Use `var(--background-elevated-high)` ONLY for floating overlays (modals, dropdowns, tooltips, popovers)
+- Do not overuse elevated-high - reserve it for elements that truly float above other content
 
 ## Rules
 

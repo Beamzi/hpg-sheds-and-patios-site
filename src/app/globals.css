@@ -2,6 +2,8 @@
 
 :root {
   --background: #ffffff;
+  --background-elevated: #f9fafb; /* neutral-50 - cards, sections */
+  --background-elevated-high: #f3f4f6; /* neutral-100 - modals, dropdowns, tooltips */
   --foreground: #171717;
 
   /* Colors */
@@ -11,6 +13,9 @@
   --color-border: #e5e7eb;
   --color-error: #ef4444;
   --color-success: #10b981;
+
+  /* Border */
+  --border: 1px solid #d4d4d4; /* neutral-300 for light mode */
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -33,6 +38,8 @@
 
 [data-theme="dark"] {
   --background: #0a0a0a;
+  --background-elevated: #171717; /* neutral-900 */
+  --background-elevated-high: #262626; /* neutral-800 */
   --foreground: #ededed;
   --color-border: #27272a;
   --color-muted: #52525b;
@@ -41,29 +48,34 @@
 
 @theme inline {
   --color-background: var(--background);
+  --color-background-elevated: var(--background-elevated);
+  --color-background-elevated-high: var(--background-elevated-high);
   --color-foreground: var(--foreground);
   --color-primary: var(--color-primary);
   --color-secondary: var(--color-secondary);
   --color-muted: var(--color-muted);
   --color-border: var(--color-border);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-primary);
+  --font-mono: var(--font-secondary);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
+    --background-elevated: #171717; /* neutral-900 */
+    --background-elevated-high: #262626; /* neutral-800 */
     --foreground: #ededed;
     --color-border: #27272a;
     --color-muted: #52525b;
-    --color-primary: #60a5fa; /* lighter blue for dark mode */
+    --color-primary: #60a5fa;
+    --border: 1px solid #404040; /* neutral-700 for dark mode */
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-primary), Arial, Helvetica, sans-serif;
 }
 
 /* Custom component classes using @apply */
@@ -77,10 +89,21 @@ body {
   }
 
   .card {
-    @apply bg-[var(--background)] border border-[var(--color-border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)];
+    @apply bg-[var(--background-elevated)] border-[var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)];
   }
 
   .input-field {
-    @apply border border-[var(--color-border)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] rounded-[var(--radius-md)] bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
+    @apply border-[var(--border)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] rounded-[var(--radius-md)] bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
+  }
+
+  .focus-outline {
+    outline: 2px solid #a3a3a3; /* neutral-400 for light mode */
+    outline-offset: -4px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .focus-outline {
+      outline-color: #262626; /* neutral-800 for dark mode */
+    }
   }
 }
