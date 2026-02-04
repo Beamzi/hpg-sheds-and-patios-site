@@ -6,7 +6,7 @@ export default function Hero() {
   const { hero } = homeContent;
 
   return (
-    <section className="relative overflow-hidden bg-[var(--background)]">
+    <section className="relative min-h-[calc(100vh-var(--navbar-height))] overflow-hidden bg-[var(--background)]">
       <div className="absolute inset-0">
         <Image
           src={hero.image.src}

@@ -1,11 +1,29 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { navigationContent } from "@/data/navigation";
 
 export default function Navbar() {
   const content = navigationContent;
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="border-b border-[var(--color-border)] bg-[var(--background)]">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-[var(--spacing-lg)] py-[var(--spacing-sm)]">
+    <header
+      className="group sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--background)] transition-[box-shadow] duration-300 data-[shrink=true]:shadow-[var(--shadow-sm)]"
+      data-shrink={isScrolled}
+    >
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-[var(--spacing-lg)] py-[var(--spacing-sm)] transition-[padding] duration-300 group-data-[shrink=true]:py-[var(--spacing-xs)]">
         <Link
           className="text-[var(--foreground)] text-lg font-semibold"
           href={content.brand.href}
@@ -55,7 +73,10 @@ export default function Navbar() {
               )
             )}
             {content.cta ? (
-              <Link className="btn-primary" href={content.cta.href}>
+              <Link
+                className="btn-primary transition-[padding] duration-300 group-data-[shrink=true]:px-[var(--spacing-sm)] group-data-[shrink=true]:py-[var(--spacing-xs)]"
+                href={content.cta.href}
+              >
                 {content.cta.label}
               </Link>
             ) : null}
@@ -91,7 +112,7 @@ export default function Navbar() {
                 ))}
                 {content.cta ? (
                   <Link
-                    className="btn-primary text-center"
+                    className="btn-primary text-center transition-[padding] duration-300 group-data-[shrink=true]:px-[var(--spacing-sm)] group-data-[shrink=true]:py-[var(--spacing-xs)]"
                     href={content.cta.href}
                   >
                     {content.cta.label}

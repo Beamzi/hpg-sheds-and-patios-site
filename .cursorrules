@@ -73,6 +73,9 @@ export const homeContent = {
 - In such cases:
   - Mark components as "use client"
   - Use React state to control interaction
-  - Drive animations via CSS classes, data-attributes, or animation libraries
+  - For animations, follow this priority:
+    1. Tailwind transition utilities (transition-colors, transition-opacity, etc.) for simple state changes
+    2. Framer Motion library for all other animations (enter/exit, layout, gestures, complex sequences)
+    3. Raw CSS only as last resort or when Motion has API limitations
 
 Do not refactor, restructure, or modify any code that I have personally added or changed unless I explicitly instruct you to do so.

@@ -6,6 +6,7 @@ export default function Home() {
     <div className="bg-[var(--background)]">
       <main>
         <Hero />
+        <div className="h-[200vh]"></div>
       </main>
     </div>
   );
