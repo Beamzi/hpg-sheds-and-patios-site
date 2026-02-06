@@ -37,6 +37,9 @@
 
   /* Layout */
   --navbar-height: 5rem;
+  --testimonial-card-width: 20rem;
+  --testimonial-card-min-height: 14rem;
+  --carousel-duration: 40s;
 }
 
 [data-theme="dark"] {
@@ -81,6 +84,15 @@ body {
   font-family: var(--font-primary), Arial, Helvetica, sans-serif;
 }
 
+@keyframes testimonial-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 /* Custom component classes using @apply */
 @layer components {
   .btn-primary {
@@ -95,6 +107,17 @@ body {
     @apply bg-[var(--background-elevated)] border-[var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)];
   }
 
+  .card-hovered {
+    @apply transition-transform transition-colors duration-200 ease-out;
+  }
+
+  .card-hovered:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-0.25rem);
+    box-shadow: 0 12px 24px 0
+      color-mix(in srgb, var(--color-primary) 30%, transparent);
+  }
+
   .input-field {
     @apply border-[var(--border)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] rounded-[var(--radius-md)] bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
   }
@@ -102,6 +125,35 @@ body {
   .focus-outline {
     outline: 2px solid #a3a3a3; /* neutral-400 for light mode */
     outline-offset: -4px;
+  }
+
+  .testimonial-carousel {
+    overflow: hidden;
+  }
+
+  .testimonial-track {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    gap: var(--spacing-md);
+    animation: testimonial-scroll var(--carousel-duration) linear infinite;
+    will-change: transform;
+  }
+
+  .testimonial-carousel:hover .testimonial-track {
+    animation-play-state: paused;
+  }
+
+  .testimonial-card {
+    @apply flex flex-col gap-[var(--spacing-sm)];
+    background: var(--background-elevated);
+    border: var(--border);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    width: var(--testimonial-card-width);
+    min-height: var(--testimonial-card-min-height);
+    flex: 0 0 auto;
   }
 
   @media (prefers-color-scheme: dark) {
