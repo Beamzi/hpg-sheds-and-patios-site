@@ -39,7 +39,11 @@
   --navbar-height: 5rem;
   --testimonial-card-width: 20rem;
   --testimonial-card-min-height: 14rem;
+  --feature-card-width: 22.5rem;
+  --feature-card-min-height: 12rem;
+  --feature-card-gap: var(--spacing-md);
   --carousel-duration: 40s;
+  --feature-carousel-duration: 500ms;
 }
 
 [data-theme="dark"] {
@@ -107,6 +111,58 @@ body {
     @apply bg-[var(--background-elevated)] border-[var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)];
   }
 
+  .split-section {
+    @apply bg-[var(--background)] py-[var(--spacing-xl)];
+  }
+
+  .split-section-inner {
+    @apply mx-auto flex w-full max-w-6xl flex-col gap-[var(--spacing-lg)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)] lg:flex-row lg:items-center;
+  }
+
+  .split-section-reverse {
+    @apply lg:flex-row-reverse;
+  }
+
+  .split-section-content {
+    @apply flex flex-1 flex-col gap-[var(--spacing-md)];
+  }
+
+  .split-section-eyebrow {
+    @apply text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)];
+  }
+
+  .split-section-title {
+    @apply text-3xl font-semibold text-[var(--foreground)] md:text-4xl;
+  }
+
+  .split-section-text {
+    @apply text-base text-[var(--foreground)] md:text-lg;
+  }
+
+  .split-section-list {
+    @apply flex flex-col gap-[var(--spacing-xs)] pl-[var(--spacing-md)] text-sm text-[var(--foreground)];
+  }
+
+  .split-section-details {
+    @apply grid gap-[var(--spacing-sm)] text-sm text-[var(--foreground)];
+  }
+
+  .split-section-detail {
+    @apply rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-sm)];
+  }
+
+  .split-section-media {
+    @apply relative flex-1 overflow-hidden rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] shadow-[var(--shadow-md)] aspect-video;
+  }
+
+  .split-section-panel {
+    @apply flex-1 rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-md)];
+  }
+
+  .service-card {
+    @apply bg-[var(--background-elevated)] border-[var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] flex flex-col gap-[var(--spacing-sm)];
+  }
+
   .card-hovered {
     @apply transition-transform transition-colors duration-200 ease-out;
   }
@@ -154,6 +210,69 @@ body {
     width: var(--testimonial-card-width);
     min-height: var(--testimonial-card-min-height);
     flex: 0 0 auto;
+  }
+
+  .feature-controls {
+    @apply mt-[var(--spacing-lg)] flex items-center justify-center gap-[var(--spacing-sm)];
+  }
+
+  .feature-control-button {
+    @apply flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--background-elevated)] text-[var(--foreground)] transition-colors hover:border-[var(--color-primary)];
+  }
+
+  .feature-carousel {
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    max-width: 70.5rem;
+    box-sizing: border-box;
+  }
+
+  .feature-track {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    gap: var(--feature-card-gap);
+    transform: translateX(
+      calc(
+        var(--feature-carousel-index) *
+          (var(--feature-card-width) + var(--feature-card-gap)) * -1
+      )
+    );
+    will-change: transform;
+  }
+
+  .feature-track-animated {
+    transition: transform var(--feature-carousel-duration) ease;
+  }
+
+  .feature-track-static {
+    transition: none;
+  }
+
+  .feature-card {
+    @apply flex flex-col gap-[var(--spacing-sm)];
+    background: var(--background-elevated);
+    border: var(--border);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    width: var(--feature-card-width);
+    min-height: var(--feature-card-min-height);
+    flex: 0 0 auto;
+  }
+
+  @media (max-width: 1200px) {
+    .feature-carousel {
+      max-width: calc(var(--feature-card-width) * 2 + var(--feature-card-gap));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .feature-carousel {
+      max-width: var(--feature-card-width);
+    }
   }
 
   @media (prefers-color-scheme: dark) {

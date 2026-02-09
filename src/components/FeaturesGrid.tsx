@@ -41,9 +41,9 @@ export default function FeaturesGrid() {
             return (
               <div
                 key={item.title}
-                className="card group flex flex-col gap-[var(--spacing-sm)] transition-shadow hover:shadow-[var(--shadow-lg)]"
+                className="card group  flex flex-col gap-[var(--spacing-sm)] transition-shadow hover:shadow-[var(--shadow-lg)]"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--background)]">
+                <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)]  bg-[var(--background)]">
                   <Icon className="text-2xl text-[var(--color-primary)] transition-transform duration-200 group-hover:scale-110" />
                 </div>
                 <h3 className="text-xl font-semibold text-[var(--foreground)]">
