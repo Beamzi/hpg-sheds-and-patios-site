@@ -32,7 +32,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative min-h-[calc(100vh-var(--navbar-height))] overflow-hidden bg-[var(--background)]">
+    <section className="hero-on-image relative min-h-[calc(100vh-var(--navbar-height))] overflow-hidden bg-[var(--background)]">
       <div className="absolute inset-0">
         <Image
           src={hero.image.src}
@@ -43,7 +43,7 @@ export default function Hero() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-[var(--background)] opacity-80" />
+        <div className="absolute inset-0 bg-[var(--hero-image-overlay)]" />
       </div>
       <motion.div
         className="relative mx-auto flex w-full max-w-6xl flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)] text-center md:items-start md:px-[var(--spacing-lg)] md:py-[var(--spacing-xl)] md:text-left"

@@ -13,6 +13,8 @@
   --color-border: #e5e7eb;
   --color-error: #ef4444;
   --color-success: #10b981;
+  --color-foreground-dark: #ededed;
+  --color-muted-dark: #52525b;
 
   /* Border */
   --border: 1px solid #d4d4d4; /* neutral-300 for light mode */
@@ -44,6 +46,7 @@
   --feature-card-gap: var(--spacing-md);
   --carousel-duration: 40s;
   --feature-carousel-duration: 500ms;
+  --hero-image-overlay: rgb(0 0 0 / 0.35);
 }
 
 [data-theme="dark"] {
@@ -54,6 +57,9 @@
   --color-border: #27272a;
   --color-muted: #52525b;
   --color-primary: #60a5fa;
+  --hero-image-overlay: rgb(0 0 0 / 0.35);
+  --color-foreground-dark: #ededed;
+  --color-muted-dark: #52525b;
 }
 
 @theme inline {
@@ -105,6 +111,12 @@ body {
 
   .btn-secondary {
     @apply bg-[var(--color-secondary)] text-white px-[var(--spacing-md)] py-[var(--spacing-sm)] rounded-[var(--radius-md)] hover:opacity-90 transition-opacity;
+  }
+
+  .hero-on-image {
+    --foreground: var(--color-foreground-dark);
+    --color-muted: var(--color-muted-dark);
+    color: var(--foreground);
   }
 
   .card {
@@ -185,6 +197,40 @@ body {
 
   .testimonial-carousel {
     overflow: hidden;
+  }
+
+  .testimonial-fade {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .testimonial-fade::before,
+  .testimonial-fade::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--spacing-xl);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .testimonial-fade::before {
+    left: 0;
+    background: linear-gradient(
+      90deg,
+      var(--background),
+      transparent
+    );
+  }
+
+  .testimonial-fade::after {
+    right: 0;
+    background: linear-gradient(
+      270deg,
+      var(--background),
+      transparent
+    );
   }
 
   .testimonial-track {

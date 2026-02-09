@@ -22,7 +22,7 @@ export default function TestimonialsCarousel() {
             {testimonials.subtitle}
           </p>
         </div>
-        <div className="testimonial-carousel mt-[var(--spacing-lg)] py-[var(--spacing-md)] ">
+        <div className="testimonial-carousel testimonial-fade mt-[var(--spacing-lg)] py-[var(--spacing-md)]">
           <div className="testimonial-track">
             {loopItems.map((item, index) => {
               const isDuplicate = index >= testimonials.items.length;

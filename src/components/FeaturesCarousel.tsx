@@ -35,8 +35,8 @@ export default function FeaturesCarousel({
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const totalItems = content.items.length;
   const loopItems = [...content.items, ...content.items];
-  const autoAdvanceMs = 3500;
-  const transitionMs = 500;
+  const autoAdvanceMs = 2000;
+  const transitionMs = 1000;
 
   const getNextIndex = (currentIndex: number) =>
     currentIndex >= totalItems - 1 ? totalItems : currentIndex + 1;
@@ -100,7 +100,7 @@ export default function FeaturesCarousel({
   };
 
   return (
-    <section className="bg-[var(--background)] py-[var(--spacing-xl)]">
+    <section className="bg-[var(--background)] py-[var(--spacing-xl)] ">
       <div className="mx-auto w-full max-w-6xl px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
         <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
           <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
@@ -115,12 +115,12 @@ export default function FeaturesCarousel({
         </div>
       </div>
       <div
-        className="feature-carousel mt-[var(--spacing-lg)]"
+        className="feature-carousel mt-[var(--spacing-md)]  "
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
         <div
-          className={`feature-track ${
+          className={`feature-track py-[var(--spacing-xs)]  ${
             isAnimating ? "feature-track-animated" : "feature-track-static"
           }`}
           style={
@@ -162,7 +162,7 @@ export default function FeaturesCarousel({
         </div>
       </div>
       <div
-        className="feature-controls"
+        className="feature-controls  "
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
