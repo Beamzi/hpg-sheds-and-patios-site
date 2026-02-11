@@ -19,6 +19,45 @@ When creating reusable component patterns, add them to globals.css using @apply 
 
 - ALL components must be fully mobile responsive
 
+## CSS Abstraction Guidelines
+
+**Add to globals.css ONLY if:**
+
+- The pattern could naturally be used across 3+ DIFFERENT types of components (e.g., `.card` applies to any card-like UI element)
+- It's a primitive UI element (button, input, badge, etc.)
+- It defines a semantic pattern that should be consistent everywhere (containers, grids)
+
+**Keep in component JSX if:**
+
+- The pattern is specific to one component's unique structure (even if that component is reused multiple times)
+- The class name includes or implies a specific component (`.split-section`, `.hero-layout`)
+- It describes "how this particular component is laid out" rather than "a reusable primitive"
+
+**Examples:**
+
+✅ Add to globals.css:
+
+```css
+.card { ... }          /* Used by many card-type components */
+.button-primary { ... } /* Used across all primary buttons */
+.container { ... }      /* Standard content width container */
+```
+
+❌ Keep in component:
+
+```tsx
+/* This is SplitSection's layout, not a global pattern */
+```
+
+**Rule of thumb: If you can't give it a generic name (without the component name in it), it shouldn't be in globals.css**
+
+Examples:
+
+- `.card` → Generic ✅
+- `.split-section` → Component-specific ❌
+- `.button-primary` → Generic ✅
+- `.hero-layout` → Component-specific ❌
+
 ## Global Components
 
 - Navbar/Header and Footer components belong ONLY in root layout.tsx

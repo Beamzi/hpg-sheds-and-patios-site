@@ -32,7 +32,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="hero-on-image relative min-h-[calc(80vh-var(--navbar-height))] overflow-hidden bg-[var(--background)]">
+    <section className="hero-on-image relative min-h-[calc(98vh-var(--navbar-height))] overflow-hidden bg-[var(--background)]">
       <div className="absolute inset-0">
         <Image
           src={hero.image.src}

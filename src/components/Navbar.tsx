@@ -23,7 +23,7 @@ export default function Navbar() {
       className="group sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--background)] transition-[box-shadow] duration-300 data-[shrink=true]:shadow-[var(--shadow-sm)]"
       data-shrink={isScrolled}
     >
-      <div className="mx-auto flex w-full max-w-[var(--content-max-width)] items-center justify-between px-[var(--spacing-lg)] py-[var(--spacing-sm)] transition-[padding] duration-300 group-data-[shrink=true]:py-[var(--spacing-xs)]">
+      <div className="mx-auto flex w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-lg)] py-[var(--spacing-sm)] transition-[padding] duration-300 group-data-[shrink=true]:py-[var(--spacing-xs)]">
         <Link
           className="text-[var(--foreground)] text-lg font-semibold"
           href={content.brand.href}
@@ -70,7 +70,7 @@ export default function Navbar() {
                 >
                   {item.label}
                 </Link>
-              )
+              ),
             )}
             {content.cta ? (
               <Link

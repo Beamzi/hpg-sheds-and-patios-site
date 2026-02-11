@@ -12,7 +12,6 @@ import {
 } from "react-icons/fa";
 import type { FeaturesSectionContent } from "@/data/sections/features";
 import { useEffect, useState, type CSSProperties } from "react";
-import styles from "./FeaturesCarousel.module.css";
 
 const iconMap = {
   durableBuilds: FaHammer,
@@ -35,7 +34,7 @@ export default function FeaturesCarousel({
   content,
   hasControls,
   hasPredominateInfo,
-  cardsPerView = 3,
+  cardsPerView = 4,
 }: FeaturesCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
@@ -109,22 +108,22 @@ export default function FeaturesCarousel({
   };
 
   return (
-    <section className="bg-[var(--background)]">
+    <section className="flex flex-col items-center bg-[var(--background)] pb-[var(--spacing-lg)]">
       <div
-        className={`mx-auto w-full ${cardsPerView === 3 ? "max-w-[var(--content-max-width)]" : "max-w-[var(--content-wide-max-width)]"} px-[var(--spacing-md)] md:px-[var(--spacing-lg)]`}
+        className={`w-full ${cardsPerView === 3 ? "max-w-[var(--content-max-width)]" : "max-w-[var(--content-wide-max-width)]"} px-[var(--spacing-md)] md:px-[var(--spacing-lg)]`}
       >
-        <div className="flex max-w-[var(--content-max-width)] mx-auto">
+        <div className="flex border-b-1 mx-[var(--spacing-sm)] border-b-[var(--color-border)] pb-[var(--spacing-sm)]   justify-between  ">
           {hasPredominateInfo && (
             <>
-              <div className="mx-auto w-full max-w-[var(--content-max-width)]">
-                <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
-                  <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)]">
+              <div className=" pt-[var(--spacing-lg)] w-full max-w-[var(--content-max-width)]">
+                <div className="flex  flex-col  gap-[var(--spacing-sm)] text-center">
+                  <p className="text-sm text-start font-semibold uppercase tracking-wide text-[var(--color-muted)]">
                     {content.eyebrow}
                   </p>
-                  <h2 className="text-3xl font-semibold text-[var(--foreground)] md:text-4xl">
+                  <h2 className="text-3xl  font-semibold text-start text-[var(--foreground)] md:text-4xl">
                     {content.title}
                   </h2>
-                  <p className="mx-auto max-w-2xl text-base text-[var(--foreground)] md:text-lg">
+                  <p className=" text-start max-w-2xl text-[var(--foreground)] md:text-lg">
                     {content.subtitle}
                   </p>
                 </div>
@@ -133,13 +132,13 @@ export default function FeaturesCarousel({
           )}
           {hasControls && (
             <div
-              className={styles.controls}
+              className="mt-[var(--spacing-lg)] flex items-center justify-center gap-[var(--spacing-sm)]"
               onMouseEnter={() => setIsPaused(true)}
               onMouseLeave={() => setIsPaused(false)}
             >
               <button
                 type="button"
-                className={styles.controlButton}
+                className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] [border:var(--border)] bg-[var(--background-elevated)] text-[var(--foreground)] transition-colors hover:border-[var(--color-primary)]"
                 onClick={handlePrevious}
                 onFocus={() => setIsPaused(true)}
                 onBlur={() => setIsPaused(false)}
@@ -149,7 +148,7 @@ export default function FeaturesCarousel({
               </button>
               <button
                 type="button"
-                className={styles.controlButton}
+                className="flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] [border:var(--border)] bg-[var(--background-elevated)] text-[var(--foreground)] transition-colors hover:border-[var(--color-primary)]"
                 onClick={handleNext}
                 onFocus={() => setIsPaused(true)}
                 onBlur={() => setIsPaused(false)}
@@ -161,15 +160,12 @@ export default function FeaturesCarousel({
           )}
         </div>
         <div
-          className={`${styles.carousel} mt-[var(--spacing-md)]`}
-          style={{ "--feature-cards-per-view": cardsPerView } as CSSProperties}
+          className={`feature-carousel-layout mt-[var(--spacing-md)] ${cardsPerView === 3 ? "[--feature-cards-per-view:3]" : "[--feature-cards-per-view:4]"}`}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           <div
-            className={`${styles.track} py-[var(--spacing-xs)] ${
-              isAnimating ? styles.trackAnimated : styles.trackStatic
-            }`}
+            className={`feature-track-layout py-[var(--spacing-xs)] ${isAnimating ? "transition-transform duration-500 ease-out" : "transition-none"}`}
             style={
               {
                 "--feature-carousel-index": activeIndex,
@@ -183,9 +179,7 @@ export default function FeaturesCarousel({
               return (
                 <article
                   key={`${item.title}-${index}`}
-                  className={`${styles.card} group ${
-                    hoveredIndex === index ? "card-hovered" : ""
-                  }`}
+                  className={`feature-card-layout flex flex-col gap-[var(--spacing-sm)] bg-[var(--background-elevated)] [border:var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] group ${hoveredIndex === index ? "card-hovered" : ""}`}
                   onMouseEnter={() => {
                     setHoveredIndex(index);
                   }}

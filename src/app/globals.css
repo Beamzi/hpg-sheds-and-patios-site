@@ -42,7 +42,6 @@
   --content-wide-max-width: 90rem; /* 22.5rem */
   --navbar-height: 5rem;
   --feature-card-min-height: 12rem;
-  --feature-card-gap: var(--spacing-md);
   --feature-carousel-duration: 500ms;
   --hero-image-overlay: rgb(0 0 0 / 0.35);
 }
@@ -165,6 +164,81 @@ body {
     @apply bg-[var(--background-elevated)] border-[var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] flex flex-col gap-[var(--spacing-sm)];
   }
 
+  /* Feature carousel: layout math only (--feature-cards-per-view, --feature-carousel-index set by component). */
+  .feature-carousel-layout {
+    container-type: inline-size;
+    overflow: hidden;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .feature-carousel-layout::before,
+  .feature-carousel-layout::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--spacing-sm);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .feature-carousel-layout::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--background), transparent);
+  }
+
+  .feature-carousel-layout::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--background), transparent);
+  }
+
+  .feature-track-layout {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    transform: translateX(
+      calc(
+        var(--feature-carousel-index) *
+          (100cqw / var(--feature-cards-per-view)) * -1
+      )
+    );
+    will-change: transform;
+  }
+
+  .feature-card-layout {
+    width: calc(100cqw / var(--feature-cards-per-view) - var(--spacing-md));
+    margin-left: calc(var(--spacing-md) / 2);
+    margin-right: calc(var(--spacing-md) / 2);
+    min-height: var(--feature-card-min-height);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 1200px) {
+    .feature-carousel-layout {
+      --feature-cards-per-view: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .feature-carousel-layout {
+      --feature-cards-per-view: 1;
+    }
+
+    .feature-track-layout {
+      transform: translateX(calc(var(--feature-carousel-index) * 100cqw * -1));
+    }
+
+    .feature-card-layout {
+      width: 100cqw;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
   .input-field {
     @apply border-[var(--border)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] rounded-[var(--radius-md)] bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
   }
@@ -190,6 +264,6 @@ body {
 
 .card-hovered:hover {
   border-color: var(--color-primary);
-  box-shadow: 10 12px 24px 0
+  box-shadow: 0 12px 24px 0
     color-mix(in srgb, var(--color-primary) 30%, transparent);
 }
