@@ -1,0 +1,63 @@
+/* Testimonial carousel: scroll animation, fade edges, track and card. */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.carousel {
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel::before,
+.carousel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--spacing-xl);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.carousel::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--background), transparent);
+}
+
+.carousel::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--background), transparent);
+}
+
+.track {
+  display: flex;
+  flex-wrap: nowrap;
+  width: max-content;
+  gap: var(--spacing-md);
+  animation: scroll 40s linear infinite;
+  will-change: transform;
+}
+
+.carousel:hover .track {
+  animation-play-state: paused;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  background: var(--background-elevated);
+  border: var(--border);
+  padding: var(--spacing-lg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  width: 20rem;
+  min-height: 14rem;
+  flex: 0 0 auto;
+}

@@ -39,13 +39,10 @@
 
   /* Layout */
   --content-max-width: 72rem; /* main content width (Tailwind 6xl); change here to affect all sections */
+  --content-wide-max-width: 90rem; /* 22.5rem */
   --navbar-height: 5rem;
-  --testimonial-card-width: 20rem;
-  --testimonial-card-min-height: 14rem;
-  --feature-card-width: 22.5rem;
   --feature-card-min-height: 12rem;
   --feature-card-gap: var(--spacing-md);
-  --carousel-duration: 40s;
   --feature-carousel-duration: 500ms;
   --hero-image-overlay: rgb(0 0 0 / 0.35);
 }
@@ -93,15 +90,6 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-primary), Arial, Helvetica, sans-serif;
-}
-
-@keyframes testimonial-scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
 }
 
 /* Custom component classes using @apply */
@@ -177,17 +165,6 @@ body {
     @apply bg-[var(--background-elevated)] border-[var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] flex flex-col gap-[var(--spacing-sm)];
   }
 
-  .card-hovered {
-    @apply transition-transform transition-colors duration-200 ease-out;
-  }
-
-  .card-hovered:hover {
-    border-color: var(--color-primary);
-    transform: translateY(-0.25rem);
-    box-shadow: 0 12px 24px 0
-      color-mix(in srgb, var(--color-primary) 30%, transparent);
-  }
-
   .input-field {
     @apply border-[var(--border)] px-[var(--spacing-sm)] py-[var(--spacing-xs)] rounded-[var(--radius-md)] bg-[var(--background)] text-[var(--foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)];
   }
@@ -197,135 +174,22 @@ body {
     outline-offset: -4px;
   }
 
-  .testimonial-carousel {
-    overflow: hidden;
-  }
-
-  .testimonial-fade {
-    position: relative;
-    overflow: hidden;
-  }
-
-  .testimonial-fade::before,
-  .testimonial-fade::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: var(--spacing-xl);
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .testimonial-fade::before {
-    left: 0;
-    background: linear-gradient(
-      90deg,
-      var(--background),
-      transparent
-    );
-  }
-
-  .testimonial-fade::after {
-    right: 0;
-    background: linear-gradient(
-      270deg,
-      var(--background),
-      transparent
-    );
-  }
-
-  .testimonial-track {
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    gap: var(--spacing-md);
-    animation: testimonial-scroll var(--carousel-duration) linear infinite;
-    will-change: transform;
-  }
-
-  .testimonial-carousel:hover .testimonial-track {
-    animation-play-state: paused;
-  }
-
-  .testimonial-card {
-    @apply flex flex-col gap-[var(--spacing-sm)];
-    background: var(--background-elevated);
-    border: var(--border);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    width: var(--testimonial-card-width);
-    min-height: var(--testimonial-card-min-height);
-    flex: 0 0 auto;
-  }
-
-  .feature-controls {
-    @apply mt-[var(--spacing-lg)] flex items-center justify-center gap-[var(--spacing-sm)];
-  }
-
-  .feature-control-button {
-    @apply flex h-10 w-10 items-center justify-center rounded-[var(--radius-md)] border-[var(--border)] bg-[var(--background-elevated)] text-[var(--foreground)] transition-colors hover:border-[var(--color-primary)];
-  }
-
-  .feature-carousel {
-    overflow: hidden;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    max-width: 70.5rem;
-    box-sizing: border-box;
-  }
-
-  .feature-track {
-    display: flex;
-    flex-wrap: nowrap;
-    width: max-content;
-    gap: var(--feature-card-gap);
-    transform: translateX(
-      calc(
-        var(--feature-carousel-index) *
-          (var(--feature-card-width) + var(--feature-card-gap)) * -1
-      )
-    );
-    will-change: transform;
-  }
-
-  .feature-track-animated {
-    transition: transform var(--feature-carousel-duration) ease;
-  }
-
-  .feature-track-static {
-    transition: none;
-  }
-
-  .feature-card {
-    @apply flex flex-col gap-[var(--spacing-sm)];
-    background: var(--background-elevated);
-    border: var(--border);
-    padding: var(--spacing-lg);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-md);
-    width: var(--feature-card-width);
-    min-height: var(--feature-card-min-height);
-    flex: 0 0 auto;
-  }
-
-  @media (max-width: 1200px) {
-    .feature-carousel {
-      max-width: calc(var(--feature-card-width) * 2 + var(--feature-card-gap));
-    }
-  }
-
-  @media (max-width: 768px) {
-    .feature-carousel {
-      max-width: var(--feature-card-width);
-    }
-  }
-
   @media (prefers-color-scheme: dark) {
     .focus-outline {
       outline-color: #262626; /* neutral-800 for dark mode */
     }
   }
+}
+
+/* Outside @layer so it overrides CSS module card styles (testimonial + feature carousels). */
+.card-hovered {
+  transition:
+    border-color 0.2s ease-out,
+    box-shadow 0.2s ease-out;
+}
+
+.card-hovered:hover {
+  border-color: var(--color-primary);
+  box-shadow: 10 12px 24px 0
+    color-mix(in srgb, var(--color-primary) 30%, transparent);
 }

@@ -2,6 +2,7 @@
 
 import { homeContent } from "@/data/pages/home";
 import { useState } from "react";
+import styles from "./TestimonialsCarousel.module.css";
 
 export default function TestimonialsCarousel() {
   const { testimonials } = homeContent;
@@ -22,15 +23,15 @@ export default function TestimonialsCarousel() {
             {testimonials.subtitle}
           </p>
         </div>
-        <div className="testimonial-carousel testimonial-fade mt-[var(--spacing-lg)] py-[var(--spacing-md)]">
-          <div className="testimonial-track">
+        <div className={`${styles.carousel} mt-[var(--spacing-lg)] py-[var(--spacing-md)]`}>
+          <div className={styles.track}>
             {loopItems.map((item, index) => {
               const isDuplicate = index >= testimonials.items.length;
 
               return (
                 <article
                   key={`${item.name}-${index}`}
-                  className={`testimonial-card ${
+                  className={`${styles.card} ${
                     hoveredIndex === index ? "card-hovered" : ""
                   }`}
                   aria-hidden={isDuplicate}
