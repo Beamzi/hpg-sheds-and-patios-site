@@ -2,8 +2,9 @@ export const navigationContent = {
   ariaLabel: "Primary",
   mobileMenuLabel: "Menu",
   brand: {
-    name: "HPG Sheds & Patios",
     href: "/",
+    logo: "/logo/group-3.svg",
+    logoAlt: "HPG Sheds & Patios",
   },
   items: [
     {

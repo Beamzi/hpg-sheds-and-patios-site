@@ -33,7 +33,7 @@ export default function Hero() {
 
   return (
     <section className="hero-on-image relative min-h-[calc(98vh-var(--navbar-height))] overflow-hidden bg-[var(--background)]">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0">
         <Image
           src={hero.image.src}
           alt={hero.image.alt}
@@ -46,7 +46,7 @@ export default function Hero() {
         <div className="absolute inset-0 bg-[var(--hero-image-overlay)]" />
       </div>
       <motion.div
-        className="relative mx-auto flex w-full max-w-[var(--content-max-width)] flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)] text-center md:items-start md:px-[var(--spacing-lg)] md:py-[var(--spacing-xl)] md:text-left"
+        className="relative z-[1] mx-auto flex w-full max-w-[var(--content-max-width)] flex-col items-center gap-[var(--spacing-md)] px-[var(--spacing-md)] py-[var(--spacing-lg)] text-center md:items-start md:px-[var(--spacing-lg)] md:py-[var(--spacing-xl)] md:text-left"
         variants={containerVariants}
         initial="hidden"
         animate="show"
@@ -77,7 +77,7 @@ export default function Hero() {
             className="btn-primary w-full text-center sm:w-auto"
             href={hero.cta.href}
           >
-            {hero.cta.label}
+            <span className="btn-label">{hero.cta.label}</span>
           </Link>
         </motion.div>
       </motion.div>

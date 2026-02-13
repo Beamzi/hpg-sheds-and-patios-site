@@ -21,6 +21,25 @@ When creating reusable component patterns, add them to globals.css using @apply 
 
 ## CSS Abstraction Guidelines
 
+**Gradients:**
+
+- ALL gradients must be defined in `src/styles/gradients.css`
+- If gradients.css doesn't exist, create it
+- Import gradients.css in root layout.tsx after globals.css
+- Define gradients as CSS custom properties or utility classes
+- Reference in components via CSS variables or class names
+- NEVER define gradients inline in JSX or component styles
+
+**CSS vs Tailwind Separation:**
+
+- NEVER mix complex pure CSS with Tailwind utility classes in the same element
+- If a component needs custom CSS beyond simple Tailwind utilities, extract it to a dedicated CSS class in globals.css or component-scoped CSS
+- This prevents hot reload issues and keeps styling predictable
+- Use Tailwind for layout/spacing/simple styles, CSS classes for complex custom styling
+
+**Add to globals.css ONLY if:**
+...
+
 **Add to globals.css ONLY if:**
 
 - The pattern could naturally be used across 3+ DIFFERENT types of components (e.g., `.card` applies to any card-like UI element)

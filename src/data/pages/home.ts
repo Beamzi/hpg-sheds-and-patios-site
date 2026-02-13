@@ -4,11 +4,11 @@ import { servicesSectionContent } from "@/data/sections/services";
 export const homeContent = {
   hero: {
     eyebrow: "Built for Backyards",
-    title: "Sheds and Patios Crafted for Everyday Living",
+    title: "Sheds, Patios & Outdoor Structures Built Your Way",
     subtitle:
-      "Explore durable, beautiful outdoor structures designed to fit your space and your style.",
+      "Design your perfect shed in minutes with our interactive builder. Choose your size, style, and features - then get an instant quote",
     cta: {
-      label: "Get a Free Estimate",
+      label: "Design Your Shed",
       href: "/contact",
     },
     image: {

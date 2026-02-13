@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { navigationContent } from "@/data/navigation";
 
 export default function Navbar() {
@@ -25,10 +26,19 @@ export default function Navbar() {
     >
       <div className="mx-auto flex w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-lg)] py-[var(--spacing-sm)] transition-[padding] duration-300 group-data-[shrink=true]:py-[var(--spacing-xs)]">
         <Link
-          className="text-[var(--foreground)] text-lg font-semibold"
+          className="flex shrink-0 items-center"
           href={content.brand.href}
         >
-          {content.brand.name}
+          <span className="relative block h-10 aspect-[552/199] md:h-12">
+            <Image
+              src={content.brand.logo}
+              alt={content.brand.logoAlt}
+              fill
+              className="object-contain object-left"
+              sizes="(min-width: 768px) 133px, 111px"
+              priority
+            />
+          </span>
         </Link>
         <nav aria-label={content.ariaLabel}>
           <div className="hidden items-center gap-[var(--spacing-md)] md:flex">
@@ -77,7 +87,7 @@ export default function Navbar() {
                 className="btn-primary transition-[padding] duration-300 group-data-[shrink=true]:px-[var(--spacing-sm)] group-data-[shrink=true]:py-[var(--spacing-xs)]"
                 href={content.cta.href}
               >
-                {content.cta.label}
+                <span className="btn-label">{content.cta.label}</span>
               </Link>
             ) : null}
           </div>
@@ -115,7 +125,7 @@ export default function Navbar() {
                     className="btn-primary text-center transition-[padding] duration-300 group-data-[shrink=true]:px-[var(--spacing-sm)] group-data-[shrink=true]:py-[var(--spacing-xs)]"
                     href={content.cta.href}
                   >
-                    {content.cta.label}
+                    <span className="btn-label">{content.cta.label}</span>
                   </Link>
                 ) : null}
               </div>

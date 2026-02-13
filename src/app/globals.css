@@ -7,8 +7,8 @@
   --foreground: #171717;
 
   /* Colors */
-  --color-primary: #3b82f6;
-  --color-secondary: #64748b;
+  --color-primary: #ff4f5b;
+  --color-secondary: #529dff;
   --color-muted: #9ca3af;
   --color-border: #e5e7eb;
   --color-error: #ef4444;
@@ -45,27 +45,24 @@
   --feature-carousel-duration: 500ms;
   --hero-image-overlay: rgb(0 0 0 / 0.35);
 }
-
+/* 
 [data-theme="dark"] {
   --background: #0a0a0a;
-  --background-elevated: #171717; /* neutral-900 */
-  --background-elevated-high: #262626; /* neutral-800 */
   --foreground: #ededed;
   --color-border: #27272a;
   --color-muted: #52525b;
-  --color-primary: #60a5fa;
   --hero-image-overlay: rgb(0 0 0 / 0.35);
   --color-foreground-dark: #ededed;
   --color-muted-dark: #52525b;
-}
+} */
 
 @theme inline {
   --color-background: var(--background);
   --color-background-elevated: var(--background-elevated);
   --color-background-elevated-high: var(--background-elevated-high);
   --color-foreground: var(--foreground);
-  --color-primary: var(--color-primary);
-  --color-secondary: var(--color-secondary);
+  /* --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary); */
   --color-muted: var(--color-muted);
   --color-border: var(--color-border);
   --font-sans: var(--font-primary);
@@ -80,7 +77,7 @@
     --foreground: #ededed;
     --color-border: #27272a;
     --color-muted: #52525b;
-    --color-primary: #60a5fa;
+    /* primary comes from :root so your brand color applies in dark mode too */
     --border: 1px solid #404040; /* neutral-700 for dark mode */
   }
 }
@@ -93,12 +90,20 @@ body {
 
 /* Custom component classes using @apply */
 @layer components {
+  .btn-primary,
+  .btn-secondary {
+    position: relative;
+    overflow: hidden;
+    @apply rounded-[var(--radius-md)] px-[var(--spacing-md)] py-[var(--spacing-sm)] text-white;
+  }
+
   .btn-primary {
-    @apply bg-[var(--color-primary)] text-white px-[var(--spacing-md)] py-[var(--spacing-sm)] rounded-[var(--radius-md)] hover:opacity-90 transition-opacity;
+    border: var(--border);
+    background: var(--color-primary);
   }
 
   .btn-secondary {
-    @apply bg-[var(--color-secondary)] text-white px-[var(--spacing-md)] py-[var(--spacing-sm)] rounded-[var(--radius-md)] hover:opacity-90 transition-opacity;
+    background: var(--color-secondary);
   }
 
   .hero-on-image {
