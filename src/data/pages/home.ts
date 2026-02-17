@@ -23,6 +23,10 @@ export const homeContent = {
     title: "A Simple Path to a Custom Shed",
     subtitle:
       "Design your shed with our online tool, submit for pricing, and let us handle the build from there.",
+    cta: {
+      label: "Get started",
+      href: "/design-shed",
+    },
     steps: [
       {
         step: "Step 1",

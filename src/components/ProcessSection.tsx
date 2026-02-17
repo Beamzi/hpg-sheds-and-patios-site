@@ -4,12 +4,14 @@ import { Fragment, useEffect, useRef, useState } from "react";
 
 import {
   FaArrowRight,
+  FaChevronDown,
   FaChevronRight,
   FaClipboardCheck,
   FaDraftingCompass,
   FaPaperPlane,
   FaTruck,
 } from "react-icons/fa";
+import Link from "next/link";
 import { motion, useReducedMotion } from "motion/react";
 import { homeContent } from "@/data/pages/home";
 import {
@@ -184,8 +186,8 @@ export default function ProcessSection() {
                     repeat: Infinity,
                   }}
                 >
-                  <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
-                  <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
+                  <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border-dashed)]" />
+                  <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border-dashed)]" />
                 </motion.div>
               </div>
               <div className="absolute left-0 right-0 top-[43%] h-0.5 overflow-hidden opacity-50 z-[9] pointer-events-none">
@@ -198,8 +200,8 @@ export default function ProcessSection() {
                     repeat: Infinity,
                   }}
                 >
-                  <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
-                  <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border)]" />
+                  <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border-dashed)]" />
+                  <span className="block w-1/2 shrink-0 border-t-2 border-dashed border-[var(--color-border-dashed)]" />
                 </motion.div>
               </div>
               {/* chevron marquee between the two dashed lines */}
@@ -238,6 +240,21 @@ export default function ProcessSection() {
               </div>
             </motion.div>
           </div>
+
+          <motion.div
+            variants={itemVariants}
+            className="py-[var(--spacing-xm)]"
+          >
+            <div>
+              <FaChevronDown className="mb-4 w-10 h-10 mx-auto fill-[var(--color-background-elevated-high)]" />
+            </div>
+            <Link
+              className="btn-secondary mx-auto block w-[14rem] min-w-[14rem] text-center"
+              href={process.cta.href}
+            >
+              <span className="btn-label">{process.cta.label}</span>
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>
