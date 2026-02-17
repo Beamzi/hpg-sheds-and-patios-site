@@ -18,7 +18,7 @@ export const aboutContent: { sections: AboutSectionContent[] } = {
         "Trusted support across Southeast Queensland",
       ],
       image: {
-        src: "/images/pexels-shsh-10057229.jpg",
+        src: "/gallery/4b5593ad-f96e-4899-928a-80e5deed6068.jpg",
         alt: "Steel framed shed and patio structure",
       },
       imagePosition: "right",
@@ -36,7 +36,7 @@ export const aboutContent: { sections: AboutSectionContent[] } = {
         "Australian steel and quality products",
       ],
       image: {
-        src: "/images/pexels-shsh-10057229.jpg",
+        src: "/gallery/0f40a149-c63d-4fec-ac36-aee91334dff2.jpg",
         alt: "Custom shed build with steel framing",
       },
       imagePosition: "left",

@@ -1,87 +1,55 @@
 "use client";
 
-import {
-  FaChevronLeft,
-  FaChevronRight,
-  FaHammer,
-  FaHome,
-  FaPencilRuler,
-  FaShieldAlt,
-  FaTree,
-  FaTruck,
-} from "react-icons/fa";
-import type { FeaturesSectionContent } from "@/data/sections/features";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import type { GallerySectionContent } from "@/data/sections/gallery";
 import { motion, useReducedMotion } from "motion/react";
 import {
   getViewportRevealVariants,
   defaultViewport,
 } from "@/lib/viewport-reveal";
 import { useEffect, useState, type CSSProperties } from "react";
+import Image from "next/image";
 
-const iconMap = {
-  durableBuilds: FaHammer,
-  customDesign: FaPencilRuler,
-  backyardReady: FaTree,
-  storageSolutions: FaHome,
-  weatherReady: FaShieldAlt,
-  deliveredReady: FaTruck,
-};
-
-type FeaturesCarouselProps = {
-  content: FeaturesSectionContent;
+type GalleryCarouselProps = {
+  content: GallerySectionContent;
   hasControls?: boolean;
   hasPredominateInfo?: boolean;
-  /** Number of cards visible at once (1/3 or 1/4 of container width). Responsive breakpoints still apply (2 at 1200px, 1 at 768px). */
-  cardsPerView?: 3 | 4;
+  itemsPerView?: 3 | 4;
 };
 
-export default function FeaturesCarousel({
+export default function GalleryCarousel({
   content,
-  hasControls,
-  hasPredominateInfo,
-  cardsPerView,
-}: FeaturesCarouselProps) {
+  hasControls = true,
+  hasPredominateInfo = true,
+  itemsPerView = 4,
+}: GalleryCarouselProps) {
   const prefersReducedMotion = useReducedMotion();
   const { container: containerVariants, item: itemVariants } =
     getViewportRevealVariants(prefersReducedMotion);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(true);
-
   const [isPaused, setIsPaused] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const totalItems = content.items.length;
   const loopItems = [...content.items, ...content.items];
-  const autoAdvanceMs = 2000;
-  const transitionMs = 1000;
+  const autoAdvanceMs = 1800;
+  const transitionMs = 600;
 
   const getNextIndex = (currentIndex: number) =>
     currentIndex >= totalItems - 1 ? totalItems : currentIndex + 1;
 
   useEffect(() => {
-    if (totalItems === 0) {
-      return;
-    }
-
+    if (totalItems === 0) return;
     const interval = window.setInterval(() => {
-      if (isPaused) {
-        return;
-      }
+      if (isPaused) return;
       setIsAnimating(true);
-      setActiveIndex((prevIndex) => getNextIndex(prevIndex));
+      setActiveIndex((prev) => getNextIndex(prev));
     }, autoAdvanceMs);
-
     return () => window.clearInterval(interval);
   }, [isPaused, totalItems]);
 
   useEffect(() => {
-    if (!isAnimating || totalItems === 0) {
-      return;
-    }
-
-    if (activeIndex < totalItems) {
-      return;
-    }
-
+    if (!isAnimating || totalItems === 0) return;
+    if (activeIndex < totalItems) return;
     const timeout = window.setTimeout(() => {
       setIsAnimating(false);
       setActiveIndex(0);
@@ -89,13 +57,12 @@ export default function FeaturesCarousel({
         window.requestAnimationFrame(() => setIsAnimating(true));
       });
     }, transitionMs);
-
     return () => window.clearTimeout(timeout);
   }, [activeIndex, isAnimating, totalItems]);
 
   const handleNext = () => {
     setIsAnimating(true);
-    setActiveIndex((prevIndex) => getNextIndex(prevIndex));
+    setActiveIndex((prev) => getNextIndex(prev));
   };
 
   const handlePrevious = () => {
@@ -111,13 +78,13 @@ export default function FeaturesCarousel({
       return;
     }
     setIsAnimating(true);
-    setActiveIndex((prevIndex) => prevIndex - 1);
+    setActiveIndex((prev) => prev - 1);
   };
 
   return (
     <section className="flex flex-col items-center bg-[var(--background)] pb-[var(--spacing-lg)]">
       <motion.div
-        className={`w-full ${cardsPerView === 3 ? "max-w-[var(--content-max-width)]" : "max-w-[var(--content-wide-max-width)]"} px-[var(--spacing-md)] md:px-[var(--spacing-lg)]`}
+        className={`w-full ${itemsPerView === 3 ? "max-w-[var(--content-max-width)]" : "max-w-[var(--content-wide-max-width)]"} px-[var(--spacing-md)] md:px-[var(--spacing-lg)]`}
         variants={containerVariants}
         initial="hidden"
         whileInView="show"
@@ -125,24 +92,25 @@ export default function FeaturesCarousel({
       >
         <motion.div
           variants={itemVariants}
-          className="flex border-b-1 mx-[var(--spacing-sm)] border-b-[var(--color-border)] dark:border-b-neutral-900 pb-[var(--spacing-sm)]   justify-between  "
+          className="flex mx-[var(--spacing-sm)] border-b border-b-[var(--color-border)]
+
+          dark:border-b-neutral-900  dark:text-neutral-50
+          pb-[var(--spacing-sm)] justify-between"
         >
           {hasPredominateInfo && (
-            <>
-              <div className=" pt-[var(--spacing-lg)] w-full max-w-[var(--content-max-width)]">
-                <div className="flex  flex-col  gap-[var(--spacing-sm)] text-center">
-                  <p className="text-sm text-start font-semibold uppercase tracking-wide text-[var(--color-muted)]">
-                    {content.eyebrow}
-                  </p>
-                  <h2 className="text-3xl  font-semibold text-start text-[var(--foreground)] md:text-4xl">
-                    {content.title}
-                  </h2>
-                  <p className=" text-start max-w-2xl text-[var(--foreground)] md:text-lg">
-                    {content.subtitle}
-                  </p>
-                </div>
+            <div className="pt-[var(--spacing-lg)] w-full max-w-[var(--content-max-width)]">
+              <div className="flex flex-col gap-[var(--spacing-sm)] text-center">
+                <p className="text-sm font-semibold uppercase tracking-wide text-[var(--color-muted)] text-start">
+                  {content.eyebrow}
+                </p>
+                <h2 className="text-3xl font-semibold text-start text-[var(--foreground)] md:text-4xl">
+                  {content.title}
+                </h2>
+                <p className="text-start max-w-2xl text-[var(--foreground)] md:text-lg">
+                  {content.subtitle}
+                </p>
               </div>
-            </>
+            </div>
           )}
           {hasControls && (
             <div
@@ -175,43 +143,41 @@ export default function FeaturesCarousel({
         </motion.div>
         <motion.div
           variants={itemVariants}
-          className={`feature-carousel-layout mt-[var(--spacing-md)] ${cardsPerView === 3 ? "[--feature-cards-per-view:3]" : "[--feature-cards-per-view:4]"}`}
+          className={`gallery-carousel-layout mt-[var(--spacing-md)] ${itemsPerView === 3 ? "[--gallery-items-per-view:3]" : "[--gallery-items-per-view:4]"}`}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
         >
           <div
-            className={`feature-track-layout py-[var(--spacing-xs)] ${isAnimating ? "transition-transform duration-500 ease-out" : "transition-none"}`}
+            className={`gallery-track-layout py-[var(--spacing-xs)] ${isAnimating ? "transition-transform duration-[600ms] ease-out" : "transition-none"}`}
             style={
               {
-                "--feature-carousel-index": activeIndex,
+                "--gallery-carousel-index": activeIndex,
               } as CSSProperties
             }
           >
             {loopItems.map((item, index) => {
-              const Icon = iconMap[item.icon as keyof typeof iconMap] ?? FaHome;
               const isDuplicate = index >= totalItems;
-
               return (
                 <article
-                  key={`${item.title}-${index}`}
-                  className={`feature-card-layout flex flex-col gap-[var(--spacing-sm)] bg-[var(--background-elevated)] [border:var(--border)] p-[var(--spacing-lg)] rounded-[var(--radius-lg)] shadow-[var(--shadow-md)] group ${hoveredIndex === index ? "card-hovered" : ""}`}
-                  onMouseEnter={() => {
-                    setHoveredIndex(index);
-                  }}
-                  onMouseLeave={() => {
-                    setHoveredIndex(null);
-                  }}
+                  key={`${item.src}-${index}`}
+                  className="gallery-item-layout"
                   aria-hidden={isDuplicate}
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-md)] bg-[var(--background)]">
-                    <Icon className="text-2xl text-[var(--color-primary)] transition-transform duration-200 group-hover:scale-110" />
+                  <div className="gallery-item-frame relative w-full">
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                      className="object-cover"
+                    />
                   </div>
-                  <h3 className="text-xl font-semibold text-[var(--foreground)]">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm text-[var(--color-muted)]">
-                    {item.description}
-                  </p>
+                  <a
+                    href="/about"
+                    className="btn-secondary w-full text-center py-[var(--spacing-xs)] text-sm"
+                  >
+                    <span className="btn-label">{content.exploreLabel}</span>
+                  </a>
                 </article>
               );
             })}

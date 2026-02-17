@@ -1,5 +1,6 @@
 import FeaturesGrid from "@/components/FeaturesGrid";
 import FeaturesCarousel from "@/components/FeaturesCarousel";
+import GalleryCarousel from "@/components/GalleryCarousel";
 import Hero from "@/components/Hero";
 import ComplianceSection from "@/components/ComplianceSection";
 import ProcessSection from "@/components/ProcessSection";
@@ -18,8 +19,8 @@ export default function Home() {
         <TestimonialsCarousel />
 
         <ComplianceSection />
-        <FeaturesCarousel
-          content={homeContent.features}
+        <GalleryCarousel
+          content={homeContent.gallery}
           hasControls={true}
           hasPredominateInfo={true}
         />

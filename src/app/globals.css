@@ -95,6 +95,11 @@ body {
   font-family: var(--font-primary), Arial, Helvetica, sans-serif;
 }
 
+/* Always reserve scrollbar space so layout is consistent when navigating between scrolling and non-scrolling pages */
+html {
+  scrollbar-gutter: stable;
+}
+
 /* Custom component classes using @apply */
 @layer components {
   .btn-primary,
@@ -105,7 +110,7 @@ body {
   }
 
   .btn-primary {
-    border: var(--border);
+    /* border: var(--border); */
     background: var(--color-primary);
     @apply text-white;
   }
@@ -144,12 +149,28 @@ body {
     max-width: var(--content-max-width);
   }
 
+  .split-section-inner-equal-height {
+    @apply lg:items-stretch;
+  }
+
   .split-section-reverse {
     @apply lg:flex-row-reverse;
   }
 
   .split-section-content {
     @apply flex flex-1 flex-col gap-[var(--spacing-md)];
+  }
+
+  .split-section-content-with-bg {
+    @apply relative overflow-hidden rounded-[var(--radius-lg)];
+  }
+
+  .split-section-content-bg {
+    @apply absolute inset-0 z-0;
+  }
+
+  .split-section-content-inner {
+    @apply relative z-10 flex flex-1 flex-col gap-[var(--spacing-md)] p-[var(--spacing-lg)];
   }
 
   .split-section-eyebrow {
@@ -182,6 +203,15 @@ body {
 
   .split-section-panel {
     @apply flex-1 rounded-[var(--radius-lg)] border-[var(--border)] bg-[var(--background-elevated)] p-[var(--spacing-lg)] shadow-[var(--shadow-md)];
+  }
+
+  /* Unstyled slot for custom media (e.g. contact cards) so content isn’t double-boxed. */
+  .split-section-media-slot {
+    @apply flex min-w-0 flex-1 flex-col justify-center gap-[var(--spacing-md)];
+  }
+
+  .split-section-inner-equal-height .split-section-media-slot {
+    @apply min-h-0 justify-start;
   }
 
   .service-card {
@@ -257,6 +287,91 @@ body {
     }
 
     .feature-card-layout {
+      width: 100cqw;
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
+  /* Gallery carousel: portrait (phone) aspect image cells, distinct from feature carousel. */
+  .gallery-carousel-layout {
+    container-type: inline-size;
+    overflow: hidden;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .gallery-carousel-layout::before,
+  .gallery-carousel-layout::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--spacing-sm);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .gallery-carousel-layout::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--background), transparent);
+  }
+
+  .gallery-carousel-layout::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--background), transparent);
+  }
+
+  .gallery-track-layout {
+    display: flex;
+    flex-wrap: nowrap;
+    width: max-content;
+    transform: translateX(
+      calc(
+        var(--gallery-carousel-index) *
+          (100cqw / var(--gallery-items-per-view)) * -1
+      )
+    );
+    will-change: transform;
+  }
+
+  .gallery-item-layout {
+    width: calc(100cqw / var(--gallery-items-per-view) - var(--spacing-md));
+    margin-left: calc(var(--spacing-md) / 2);
+    margin-right: calc(var(--spacing-md) / 2);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .gallery-item-frame {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--background-elevated);
+    border: var(--border);
+  }
+
+  @media (max-width: 1200px) {
+    .gallery-carousel-layout {
+      --gallery-items-per-view: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .gallery-carousel-layout {
+      --gallery-items-per-view: 1;
+    }
+
+    .gallery-track-layout {
+      transform: translateX(calc(var(--gallery-carousel-index) * 100cqw * -1));
+    }
+
+    .gallery-item-layout {
       width: 100cqw;
       margin-left: 0;
       margin-right: 0;

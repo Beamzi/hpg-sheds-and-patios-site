@@ -1,4 +1,5 @@
 import { featuresSectionContent } from "@/data/sections/features";
+import { gallerySectionContent } from "@/data/sections/gallery";
 import { servicesSectionContent } from "@/data/sections/services";
 
 export const homeContent = {
@@ -9,7 +10,7 @@ export const homeContent = {
       "Design your perfect shed in minutes with our interactive builder. Choose your size, style, and features - then get an instant quote",
     cta: {
       label: "Design Your Shed",
-      href: "/contact",
+      href: "/design-shed",
     },
     image: {
       src: "/images/pexels-shsh-10057229.jpg",
@@ -18,6 +19,7 @@ export const homeContent = {
   },
   services: servicesSectionContent,
   features: featuresSectionContent,
+  gallery: gallerySectionContent,
   process: {
     eyebrow: "How It Works",
     title: "A Simple Path to a Custom Shed",
@@ -93,7 +95,7 @@ export const homeContent = {
   },
   testimonials: {
     eyebrow: "Customer Stories",
-    title: "Backyards Made Better",
+    title: "Sheds & Patios Made Better",
     subtitle:
       "Placeholder testimonials highlighting how HPG delivers smooth builds and standout outdoor spaces.",
     items: [

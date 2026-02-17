@@ -25,16 +25,21 @@ export default function Navbar() {
       data-shrink={isScrolled}
     >
       <div className="mx-auto flex w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-lg)] py-[var(--spacing-sm)] transition-[padding] duration-300 group-data-[shrink=true]:py-[var(--spacing-xs)]">
-        <Link
-          className="flex shrink-0 items-center"
-          href={content.brand.href}
-        >
+        <Link className="flex shrink-0 items-center" href={content.brand.href}>
           <span className="relative block h-10 aspect-[552/199] md:h-12">
             <Image
-              src={content.brand.logo}
+              src={content.brand.logoLight}
               alt={content.brand.logoAlt}
               fill
-              className="object-contain object-left"
+              className="object-contain object-left dark:hidden"
+              sizes="(min-width: 768px) 133px, 111px"
+              priority
+            />
+            <Image
+              src={content.brand.logoDark}
+              alt={content.brand.logoAlt}
+              fill
+              className="object-contain object-left hidden dark:block"
               sizes="(min-width: 768px) 133px, 111px"
               priority
             />
@@ -43,7 +48,7 @@ export default function Navbar() {
         <nav aria-label={content.ariaLabel}>
           <div className="hidden items-center gap-[var(--spacing-md)] md:flex">
             {content.items.map((item) =>
-              item.subItems && item.subItems.length > 0 ? (
+              item.subItems?.length ? (
                 <details className="relative" key={item.href}>
                   <summary className="flex cursor-pointer list-none items-center gap-[var(--spacing-xs)] text-[var(--foreground)] transition-colors hover:text-[var(--color-primary)]">
                     <span>{item.label}</span>
@@ -105,7 +110,7 @@ export default function Navbar() {
                     >
                       {item.label}
                     </Link>
-                    {item.subItems && item.subItems.length > 0 ? (
+                    {item.subItems?.length ? (
                       <div className="flex flex-col gap-[var(--spacing-xs)] pl-[var(--spacing-sm)]">
                         {item.subItems.map((subItem) => (
                           <Link

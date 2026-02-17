@@ -79,11 +79,11 @@ export default function ProcessSection() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[var(--background)]  py-[var(--spacing-xl)]"
+      className="bg-[var(--background)] py-[var(--spacing-xl)]"
     >
       <div className="mx-auto w-full  max-w-[var(--content-max-width)] px-[var(--spacing-md)] md:px-[var(--spacing-lg)]">
         <motion.div
-          className="flex flex-col gap-[var(--spacing-md)] lg:grid lg:grid-cols-1 lg:grid-rows-[auto_1fr] lg:gap-[var(--spacing-sm)]"
+          className="flex flex-col gap-[var(--spacing-md)] lg:grid lg:grid-cols-1 lg:grid-rows-[auto_1fr] lg:gap-[var(--spacing-xl)]"
           variants={containerVariants}
           initial="hidden"
           whileInView="show"

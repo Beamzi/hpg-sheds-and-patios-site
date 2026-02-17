@@ -10,7 +10,6 @@ export const contactSectionContent = {
         label: "Phone",
         value: "0402 892 846",
         href: "tel:0402892846",
-        note: "A 1800 number is planned for future enquiries.",
       },
       {
         label: "Email",
@@ -20,7 +19,6 @@ export const contactSectionContent = {
       {
         label: "Location",
         value: "Greenbank, QLD",
-        note: "Exact street address provided on request.",
       },
     ],
   },
