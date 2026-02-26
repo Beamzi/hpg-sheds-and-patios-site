@@ -13,7 +13,7 @@ export const homeContent = {
       href: "/design-shed",
     },
     image: {
-      src: "/images/IMG_2858 (3)_02asdasdasdasd.jpg",
+      src: "/images/IMG_2858.jpg",
       alt: "Backyard shed with patio seating",
     },
   },
