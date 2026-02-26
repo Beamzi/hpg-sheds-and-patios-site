@@ -10,7 +10,7 @@ export default function WebshedWrapper() {
         <iframe
           allow="clipboard-read; clipboard-write; web-share"
           allowFullScreen
-          src="https://howardprojectgroup.webshed.app"
+          src="https://hpgshedsandpatios.webshed.app/"
           style={{ width: "100%", height: "100%", border: "none" }}
         />
       </div>

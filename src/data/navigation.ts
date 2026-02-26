@@ -9,8 +9,8 @@ export const navigationContent = {
   mobileMenuLabel: "Menu",
   brand: {
     href: "/",
-    logoLight: "/logo/light-mode.svg",
-    logoDark: "/logo/dark-mode.svg",
+    logoLight: "/final-logo/svg-logo-horizontal.svg",
+    logoDark: "/final-logo/svg-logo-horizontal.svg",
     logoAlt: "HPG Sheds & Patios",
   },
   items: [

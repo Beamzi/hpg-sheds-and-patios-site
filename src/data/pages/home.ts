@@ -13,7 +13,7 @@ export const homeContent = {
       href: "/design-shed",
     },
     image: {
-      src: "/images/pexels-shsh-10057229.jpg",
+      src: "/images/IMG_2858%20(3)_02asdasdasdasd.jpg",
       alt: "Backyard shed with patio seating",
     },
   },
@@ -69,7 +69,12 @@ export const homeContent = {
         icon: "australianStandards",
         title: "Australian Standards",
         description:
-          "Designed to suit AS/NZS wind and timber framing guidance.",
+          "Designed to Australian Standards and wind ratings to suit your.",
+      },
+      {
+        icon: "solarReady",
+        title: "Solar Ready",
+        description: "All our sheds are designed for solar panel loading",
       },
       {
         icon: "nccAligned",
@@ -77,19 +82,16 @@ export const homeContent = {
         description: "Build approach follows relevant NCC requirements.",
       },
       {
-        icon: "councilSupport",
-        title: "Council Compliance",
-        description: "Documentation prepared to support local approvals.",
+        icon: "designCompliance",
+        title: "Design Compliance",
+        description:
+          "Drawings and documentation provided ready for private certifier applications.",
       },
       {
         icon: "engineeringCert",
         title: "Engineering Certification",
-        description: "Site-specific certification available where required.",
-      },
-      {
-        icon: "consumerGuarantees",
-        title: "Consumer Guarantees",
-        description: "Work delivered under Australian Consumer Law.",
+        description:
+          "Site-specific certification is available. Current soil test (not included) is required for footing / slab design certifications.",
       },
     ],
   },
@@ -102,35 +104,35 @@ export const homeContent = {
       {
         quote:
           "The entire process felt effortless. The shed design tool helped us visualize the layout, and the finished build matched every detail.",
-        name: "Taylor Morgan",
+        name: "Taylor M",
         location: "Brisbane, QLD",
         project: "10x8 custom garden shed",
       },
       {
         quote:
           "HPG kept us updated at every step. Delivery was on schedule, and the patio feels like an extra room outdoors.",
-        name: "Priya Shah",
+        name: "Priya S",
         location: "Gold Coast, QLD",
         project: "Covered patio extension",
       },
       {
         quote:
           "We needed secure storage for tools and bikes. The team optimized the layout and made sure everything was weather-tight.",
-        name: "Jordan Lee",
+        name: "Jordan L",
         location: "Sunshine Coast, QLD",
         project: "Family storage shed",
       },
       {
         quote:
           "From the quote request to final delivery, communication was clear and the craftsmanship was top-notch.",
-        name: "Alex Nguyen",
+        name: "Alex N",
         location: "Ipswich, QLD",
         project: "Workshop shed build",
       },
       {
         quote:
           "The shed blends perfectly with our backyard. The team handled permits and the install without any hassle for us.",
-        name: "Renee Walters",
+        name: "Renee W",
         location: "Toowoomba, QLD",
         project: "Backyard studio shed",
       },

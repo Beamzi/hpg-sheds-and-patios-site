@@ -2,6 +2,7 @@
 
 import {
   FaBalanceScale,
+  FaSolarPanel,
   FaClipboardCheck,
   FaDraftingCompass,
   FaMapMarkedAlt,
@@ -16,10 +17,10 @@ import { homeContent } from "@/data/pages/home";
 
 const iconMap = {
   australianStandards: FaDraftingCompass,
+  solarReady: FaSolarPanel,
   nccAligned: FaClipboardCheck,
-  councilSupport: FaMapMarkedAlt,
+  designCompliance: FaMapMarkedAlt,
   engineeringCert: FaCertificate,
-  consumerGuarantees: FaBalanceScale,
 };
 
 export default function ComplianceSection() {

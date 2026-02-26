@@ -24,9 +24,9 @@ export default function Navbar() {
       className="group sticky top-0 z-50 border-b border-[var(--color-border)] bg-[var(--background)] transition-[box-shadow] duration-300 data-[shrink=true]:shadow-[var(--shadow-sm)]"
       data-shrink={isScrolled}
     >
-      <div className="mx-auto flex w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-lg)] py-[var(--spacing-sm)] transition-[padding] duration-300 group-data-[shrink=true]:py-[var(--spacing-xs)]">
+      <div className="mx-auto flex w-full max-w-[var(--content-wide-max-width)] items-center justify-between px-[var(--spacing-lg)] py-[var(--spacing-xs)] transition-[padding] duration-300">
         <Link className="flex shrink-0 items-center" href={content.brand.href}>
-          <span className="relative block h-10 aspect-[552/199] md:h-12">
+          <span className="relative block h-14 aspect-[552/199] transition-[height] duration-300 group-data-[shrink=true]:h-10 md:h-16 group-data-[shrink=true]:md:h-12">
             <Image
               src={content.brand.logoLight}
               alt={content.brand.logoAlt}
