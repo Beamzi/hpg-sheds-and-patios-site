@@ -108,7 +108,7 @@ export default function ContactSection() {
           description={contactSectionContent.subtitle}
           media={contactCards}
           imagePosition="right"
-          contentBackgroundImage="/images/pexels-shsh-10057229.jpg"
+          contentBackgroundImage={contactSectionContent.contentBackgroundImage}
         />
       </motion.div>
     </motion.div>

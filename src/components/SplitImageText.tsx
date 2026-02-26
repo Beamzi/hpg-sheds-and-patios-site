@@ -63,15 +63,15 @@ export default function SplitImageText({
         >
           {contentBackgroundImage ? (
             <>
-              <div className="split-section-content-bg">
-                <Image
-                  src={contentBackgroundImage}
-                  alt=""
-                  fill
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  className="object-cover opacity-50"
-                />
-              </div>
+              <div
+                className="split-section-content-bg"
+                style={{
+                  backgroundImage: `url(${contentBackgroundImage.replace(/"/g, "%22")})`,
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                  opacity: 0.5,
+                }}
+              />
               <div className="split-section-content-inner">{contentInner}</div>
             </>
           ) : (

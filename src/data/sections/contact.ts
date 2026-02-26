@@ -3,6 +3,7 @@ export const contactSectionContent = {
   title: "Start your shed or patio project",
   subtitle:
     "Reach out for quotes, timelines, or guidance on the right structure for your space.",
+  contentBackgroundImage: "/images/pexels-shsh-10057229.jpg",
   contactDetails: {
     title: "Contact details",
     items: [
