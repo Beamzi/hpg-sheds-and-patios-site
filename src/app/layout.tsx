@@ -23,6 +23,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  verification: {
+    google: "F2qaCKc8UTkoTStBw2a2IQl6N6i-5EhXVQaWU4qwW4I",
+  },
   title: "HPG Sheds & Patios",
   description: "Sheds, Patios & Outdoor Structures Built Your Way",
   icons: {
